@@ -24,13 +24,14 @@
 <!-- Three or four sentences. Which corpus you picked, and the kinds of
      questions your system answers. Write it for someone who has never seen
      this repo.
-
-     Milestone 5. -->
+     Milestone 5. --> 
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size:** Paragraph-based (variable length, splitting on double newlines `\n\n`)
+**Overlap:** 0 characters
+
+In Milestone 1, I observed that the `campus_life` corpus consists of short documents averaging ~317 characters (1–3 paragraphs each). Fixed-sized character windows with overlap often slice across sentence boundaries mid-thought. By switching to a paragraph-level splitting strategy (`\n\n`), each chunk preserves an entire coherent thought, increasing accuracy for vector retrieval. This resulted in 271 clean paragraph chunks across the corpus.
 
 <!-- What about YOUR documents made you pick these numbers? Short posts and
      long sectioned guides don't want the same chunking, and "800 seemed
@@ -53,12 +54,12 @@
 
      Milestone 3. -->
 
-**Chunk 1** — source: `` — produced by: ``
+**Chunk 1** — source: `admin_add_drop_deadline.txt#0` — produced by: `chunking.py::split_documents`
 
 ```
 ```
 
-**Chunk 2** — source: `` — produced by: ``
+**Chunk 2** — source: `admin_housing_lottery.txt#0` — produced by: `chunking.py::split_documents`
 
 ```
 ```

@@ -24,7 +24,7 @@ contains the answer.
 
 **Why this target:**
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+     I expect that one to be hard." --> The `campus_life` corpus contains very focused, single-topic documents (~317 characters on average). Because topics rarely span multiple files, vector similarity should easily retrieve the single matching post for at least 4 out of 5 questions, leaving a 1-question margin for semantic phrasing differences.
 
 ---
 
@@ -34,8 +34,7 @@ Every answer the system produces names at least one source document.
 
 **Why this target:**
 <!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
-
+     or what would have to go wrong for it not to be? -->Every query in this pipeline is explicitly grounded using prompt instructions that mandate citing source filenames (e.g., `admin_housing_lottery.txt`). Since Gemini receives the document names directly in the retrieved context block, failing to name a source would indicate a complete failure of prompt instruction-following.
 ---
 
 ## 3. The relevance gate stops out-of-corpus questions
@@ -51,7 +50,7 @@ in at least 4 of 5 tries.
 
 **Why this target:**
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
+     Was there a clean gap, or did the two groups overlap? -->With a vector distance cutoff set around 0.6, out-of-scope questions (such as inquiries about unrelated universities or topics not in `campus_life`) typically produce distances above 0.65–0.70, creating a distinct margin between valid context matches and irrelevancies.
 
 ---
 
@@ -67,7 +66,7 @@ in at least 4 of 5 tries.
        - "At least 4 of 5 sampled chunks read as a complete thought, with no
           sentence cut in half at either end."
        - "No chunk is shorter than 200 characters, since anything below that
-          in my corpus turned out to be a heading with no content under it." -->
+          in my corpus turned out to be a heading with no content under it." -->Because `campus_life` documents consist of short 1-to-3 paragraph posts, fixed-size character chunking often slices right through mid-sentence boundaries. Setting this target ensures that our custom chunker in Milestone 3 successfully aligns chunk boundaries with natural paragraph or sentence endings.
 
 
 
@@ -85,7 +84,7 @@ in at least 4 of 5 tries.
      speed, about refusals, about a particular kind of question your corpus
      handles badly, about source attribution being correct rather than merely
      present — anything, as long as it names a number or an observable
-     outcome. -->
+     outcome. -->Retrieving the correct document is only half the job; the language model must also accurately extract the exact policy detail (like "credit hours" or "shows as a W") in its final text rather than summarizing vaguely.
 
 
 

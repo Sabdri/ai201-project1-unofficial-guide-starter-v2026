@@ -39,7 +39,24 @@ from pathlib import Path
 
 import config
 import questions as qs
+import time
 
+MODEL_ERROR = "[no answer — model call failed]"
+
+
+def answer_with_retry(question, results, attempts=4, wait=20):
+    """Retry the model call on transient API errors (503, rate limits)."""
+    from generate import answer_from_chunks
+    for attempt in range(1, attempts + 1):
+        try:
+            return answer_from_chunks(question, results, cache=False)
+        except Exception as exc:
+            if attempt == attempts:
+                print(f"    gave up after {attempts} attempts: {exc}")
+                return f"{MODEL_ERROR}: {type(exc).__name__}: {exc}"
+            print(f"    {type(exc).__name__}, retrying in {wait}s")
+            time.sleep(wait)
+            wait *= 2
 
 def load_scorer():
     """Use scorer.py if the student has built it. Otherwise run unscored."""
@@ -55,7 +72,6 @@ def run_once(question: str, top_k, threshold, corpus, variant):
     """One question, one run. Returns the answer and what retrieval gave us."""
     from store import search
     import gate
-    from generate import answer_from_chunks
 
     results = search(question, top_k=top_k, corpus=corpus, variant=variant)
     decision = gate.check(results, threshold=threshold)
@@ -64,7 +80,7 @@ def run_once(question: str, top_k, threshold, corpus, variant):
         return gate.REFUSAL, results, decision
 
     # cache=False on purpose. Three runs have to be three real answers.
-    answer = answer_from_chunks(question, results, cache=False)
+    answer = answer_with_retry(question, results)
     return answer, results, decision
 
 
@@ -112,10 +128,13 @@ def main():
             answer, results, decision = run_once(
                 question, top_k, threshold, corpus, args.variant
             )
-            passed = judge(question, expects, answer, results) if judge else None
+            if answer.startswith(MODEL_ERROR):
+                passed = "error"
+            else:
+                passed = judge(question, expects, answer, results) if judge else None
             run_results.append(passed)
 
-            mark = {True: "pass", False: "fail", None: "—"}[passed]
+            mark = {True: "pass", False: "fail", None: "—", "error": "ERROR"}[passed]
             print(f"  run {run}: {mark}  (best distance {decision.best_distance:.3f})")
 
             transcript.append(
@@ -207,7 +226,7 @@ def write_report(rows, transcript, gate_rows, args, corpus, top_k, threshold, sc
     for row in rows:
         cells = []
         for passed in row["runs"]:
-            cells.append({True: "pass", False: "fail", None: " "}[passed])
+            cells.append({True: "pass", False: "fail", None: " ", "error": "error"}[passed])
         question = row["question"].replace("|", "\\|")
         lines.append(f"| {question} | {' | '.join(cells)} |")
 

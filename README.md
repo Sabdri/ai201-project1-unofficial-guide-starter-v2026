@@ -124,8 +124,6 @@ generation by `generate.py::answer_from_chunks`, question 1 run 2:
 
 ## Verdicts
 
-## Verdicts
-
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
 | 1 | Retrieved chunk contains the answer | **MET** | Inspected chunks confirm the top retrieved result for all 5 questions explicitly contains the required answer text. |

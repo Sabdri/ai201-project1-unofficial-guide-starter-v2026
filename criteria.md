@@ -51,6 +51,25 @@ For at least 4 of my 5 test questions, the final generated answer explicitly inc
 **Why this target:**
 Retrieving the correct document is only half the job; the language model must also accurately extract the exact policy detail in its final text rather than summarizing vaguely.
 
+> **Revised in unit 2:** For at least 4 of my 5 test questions, the generated
+> answer contains the key factual detail, checked as a case-insensitive
+> substring match against an `expects` string **that appears verbatim in the
+> source document**. Target unchanged at 4 of 5.
+>
+> **Why revised:** the criterion measured the wrong thing. One of my `expects`
+> strings is `"randomly drawn"`, and that phrase appears nowhere in the 88
+> documents — the source says "get a number drawn at random". No correct,
+> faithfully grounded answer could ever have matched it, so for that question
+> the criterion was scoring whether the model guessed my paraphrase, not
+> whether it got the policy right. Requiring `expects` to be quoted from the
+> document makes it a test of the answer instead of a test of my wording.
+>
+> **What this revision does not do:** it does not rescore the before-run. That
+> stays at 3/5 MISSED under the original wording. The target is unchanged, no
+> question moves from fail to pass retroactively, and the after-run is reported
+> under both the original and the revised yardstick so the improvement is not
+> confounded with the revision.
+
 ---
 <!-- ─────────────────────────────────────────────────────────────────────────
      UNIT 2 — read this before you change anything above.

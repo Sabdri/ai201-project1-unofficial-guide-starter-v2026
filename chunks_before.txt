@@ -1,0 +1,155 @@
+# Retrieved chunks, in full
+
+- Produced by: `inspect_chunks.py::main`
+- Retrieval: `store.py::search`, chunks from `chunker.py::split_documents`
+- Corpus: `campus_life` · top-k: 5 · cutoff: 0.6
+
+
+##############################################################################
+# TEST QUESTIONS
+##############################################################################
+
+==============================================================================
+Q: How are juniors and seniors ordered in the housing lottery?
+Gate: best distance 0.234 is under the 0.6 cutoff
+==============================================================================
+
+[1] admin_housing_lottery.txt#1  distance 0.2343  (373 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+The housing lottery is not random in the way most people assume. Rising sophomores get a number drawn at random, but juniors and seniors are ordered by accumulated credit hours first, and only tie-break randomly. That means a senior who took summer courses reliably beats a senior who didn't. Numbers come out the second week of March and selection runs over four evenings.
+
+[2] admin_housing_lottery.txt#0  distance 0.3207  (22 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+On the housing lottery
+
+[3] housing_morrow_house.txt#2  distance 0.6099  (87 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+The good: cheapest housing tier by about $900 a year, and the singles are real singles.
+
+[4] housing_aldridge_hall.txt#1  distance 0.6497  (111 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+I lived here my sophomore year. Built 1968, renovated 2019. Rooms are doubles with a shared bathroom per floor.
+
+[5] housing_innisfree_hall.txt#1  distance 0.6531  (164 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Transferred in last year, so take this with a grain of salt. Built 1991, renovated 2022. Rooms are doubles arranged as pairs sharing one bathroom between two rooms.
+
+expects: 'credit hours'
+
+==============================================================================
+Q: How do rising sophomores get their housing lottery number?
+Gate: best distance 0.174 is under the 0.6 cutoff
+==============================================================================
+
+[1] admin_housing_lottery.txt#1  distance 0.1743  (373 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+The housing lottery is not random in the way most people assume. Rising sophomores get a number drawn at random, but juniors and seniors are ordered by accumulated credit hours first, and only tie-break randomly. That means a senior who took summer courses reliably beats a senior who didn't. Numbers come out the second week of March and selection runs over four evenings.
+
+[2] admin_housing_lottery.txt#0  distance 0.3163  (22 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+On the housing lottery
+
+[3] advising_registration.txt#2  distance 0.5641  (122 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Registration times are staggered by credit hours, same as the housing lottery. Popular courses fill in the first two days.
+
+[4] housing_morrow_house.txt#2  distance 0.5896  (87 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+The good: cheapest housing tier by about $900 a year, and the singles are real singles.
+
+[5] housing_aldridge_hall.txt#1  distance 0.6420  (111 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+I lived here my sophomore year. Built 1968, renovated 2019. Rooms are doubles with a shared bathroom per floor.
+
+expects: 'randomly drawn'
+
+==============================================================================
+Q: What is the policy regarding dropping a class after week two?
+Gate: best distance 0.372 is under the 0.6 cutoff
+==============================================================================
+
+[1] admin_add_drop_deadline.txt#1  distance 0.3719  (274 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+You can add a course through the end of the second week. Dropping is a longer window — through the end of week six — but a drop after week two shows as a W on your transcript. Nothing anywhere on the registrar's site says this plainly, and students find out from each other.
+
+[2] admin_withdrawal_deadline.txt#1  distance 0.5227  (314 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Withdrawal is a different thing from dropping and has a different date. Dropping ends at week six. Withdrawal runs to week ten, requires an adviser signature, and puts a W on the transcript that doesn't affect GPA. The two dates appear on different pages of the registrar's site and this catches people every year.
+
+[3] course_econ_101.txt#2  distance 0.5376  (36 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Expect 4 hours a week outside class.
+
+[4] admin_pass_fail_option.txt#1  distance 0.5450  (234 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Any course outside your major can be taken pass/fail, and — the part nobody mentions — you can declare it as late as week eight, after you've seen your midterm. A pass needs a C- or better. Two per year, maximum eight across a degree.
+
+[5] admin_grade_appeals.txt#1  distance 0.5522  (244 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+A grade appeal starts with the instructor and has to be raised within fifteen days of the grade posting. Only after that does it go to the department. Skipping the instructor step gets the appeal returned, which wastes most of the fifteen days.
+
+expects: 'shows as a W'
+
+==============================================================================
+Q: When can students add a course without penalty?
+Gate: best distance 0.440 is under the 0.6 cutoff
+==============================================================================
+
+[1] admin_add_drop_deadline.txt#1  distance 0.4397  (274 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+You can add a course through the end of the second week. Dropping is a longer window — through the end of week six — but a drop after week two shows as a W on your transcript. Nothing anywhere on the registrar's site says this plainly, and students find out from each other.
+
+[2] admin_pass_fail_option.txt#1  distance 0.4796  (234 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Any course outside your major can be taken pass/fail, and — the part nobody mentions — you can declare it as late as week eight, after you've seen your midterm. A pass needs a C- or better. Two per year, maximum eight across a degree.
+
+[3] admin_grade_appeals.txt#1  distance 0.5245  (244 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+A grade appeal starts with the instructor and has to be raised within fifteen days of the grade posting. Only after that does it go to the department. Skipping the instructor step gets the appeal returned, which wastes most of the fifteen days.
+
+[4] admin_declaring_a_major.txt#1  distance 0.5424  (248 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+You declare at the end of your second semester, or later if you need to. There's no penalty for declaring late and no advantage to declaring early except that it assigns you a departmental adviser, who is generally more useful than the general one.
+
+[5] money_jobs.txt#2  distance 0.5529  (115 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Maximum is 20 hours a week during term. Most people find 10 to 12 is the point where it stops affecting coursework.
+
+expects: 'second week'
+
+==============================================================================
+Q: What happens if you drop a class before the end of week six?
+Gate: best distance 0.342 is under the 0.6 cutoff
+==============================================================================
+
+[1] admin_add_drop_deadline.txt#1  distance 0.3425  (274 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+You can add a course through the end of the second week. Dropping is a longer window — through the end of week six — but a drop after week two shows as a W on your transcript. Nothing anywhere on the registrar's site says this plainly, and students find out from each other.
+
+[2] admin_withdrawal_deadline.txt#1  distance 0.4903  (314 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Withdrawal is a different thing from dropping and has a different date. Dropping ends at week six. Withdrawal runs to week ten, requires an adviser signature, and puts a W on the transcript that doesn't affect GPA. The two dates appear on different pages of the registrar's site and this catches people every year.
+
+[3] admin_pass_fail_option.txt#1  distance 0.5198  (234 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Any course outside your major can be taken pass/fail, and — the part nobody mentions — you can declare it as late as week eight, after you've seen your midterm. A pass needs a C- or better. Two per year, maximum eight across a degree.
+
+[4] course_econ_101.txt#2  distance 0.5434  (36 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+Expect 4 hours a week outside class.
+
+[5] course_stat_150_workload.txt#1  distance 0.5608  (96 chars, produced by chunking.py::split_documents)
+------------------------------------------------------------------------------
+People keep asking so: 5 to 6 hours a week outside class. That's real time, not optimistic time.
+
+expects: 'transcript'
+
+
+##############################################################################
+# OUT OF SCOPE (the gate should refuse all five)
+##############################################################################
+refused      best distance 0.7986  nearest course_hist_118.txt#0              What is the capital of Mongolia?
+refused      best distance 0.8502  nearest dining_verrill_street_grill.txt#0  How do I change the oil in a diesel engine?
+refused      best distance 0.7803  nearest admin_study_abroad.txt#0           Who won the 1994 World Cup?
+refused      best distance 0.8243  nearest money_jobs.txt#2                   What is the recommended dosage of ibuprofen for a headache?
+refused      best distance 0.8313  nearest transit_shuttle.txt#1              How do I write a for loop in Rust?

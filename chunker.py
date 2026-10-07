@@ -22,10 +22,14 @@ to it, write down what you saw, and move on. That's a real observation about
 your pipeline, not giving up.
 """
 
+import re
 from dataclasses import dataclass
 
 import config
 from ingest import Document
+
+# A paragraph that doesn't end like a sentence is a title or label.
+HEADING_END = re.compile(r"[.!?:;)\"'”’]\s*$")
 
 
 @dataclass
@@ -108,13 +112,27 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
         if not paragraphs:
             paragraphs = [doc.text.strip()] if doc.text.strip() else []
 
-        for index, para in enumerate(paragraphs):
+        # Unit 2 fix: a title line like "On the housing lottery" has no
+        # sentence ending and isn't a thought on its own. Attach it to the
+        # paragraph below instead of indexing it as its own chunk.
+        merged: list[str] = []
+        pending_heading = ""
+        for para in paragraphs:
+            if not HEADING_END.search(para):
+                pending_heading = f"{pending_heading}\n{para}".strip()
+                continue
+            merged.append(f"{pending_heading}\n\n{para}" if pending_heading else para)
+            pending_heading = ""
+        if pending_heading:
+            merged.append(pending_heading)
+
+        for index, para in enumerate(merged):
             chunks.append(
                 Chunk(
                     text=para,
                     source=doc.source,
                     index=index,
-                    produced_by="chunking.py::split_documents",
+                    produced_by="chunker.py::split_documents",
                 )
             )
 

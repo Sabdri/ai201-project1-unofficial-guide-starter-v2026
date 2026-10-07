@@ -24,7 +24,7 @@ names a target of "4 of 5", and four of three is not a thing.
 QUESTIONS = [
     # {"question": "...", "expects": "..."},
     {"question": "How are juniors and seniors ordered in the housing lottery?", "expects": "credit hours"},
-    {"question": "How do rising sophomores get their housing lottery number?", "expects": "randomly drawn"},
+    {"question": "How do rising sophomores get their housing lottery number?", "expects": "randomly drawn", "expects_revised": "drawn at random"},
     {"question": "What is the policy regarding dropping a class after week two?", "expects": "shows as a W"},
     {"question": "When can students add a course without penalty?", "expects": "second week"},
     {"question": "What happens if you drop a class before the end of week six?", "expects": "transcript"},
